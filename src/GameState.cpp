@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <fstream>
-#include "GameState.h"
 #include <string>
 #include <vector>
 using namespace std;
@@ -20,7 +19,7 @@ using namespace std;
 
 int main() {
 	string word; // current word being solved by the user.
-	string userWord; // the current word, but only the letters they have guessed.
+	string solvedWord; // the current word, but only the letters they have guessed.
 	vector<string> wrongLetters; // wrong letters that the user has chosen.
 	vector<string> wrongWords; // wrong words that the user has played.
 	int attemptsLeft; // number of attempts the user has left.
@@ -55,9 +54,42 @@ int main() {
 	cout << "Proceeding..." << endl << "What is your name?: ";
 	cin >> playername;
 	Player player(playername);
+	cout << "Beginning the Word Guess game... " << endl;
+	bool play = true; // remains true if the user wants to continue to play.
 
-
+	// Main block for the game.
 	do {
-
-	} while ();
+		word = list.getWord();
+		solvedWord = word;
+		string selection;
+		for (int i=0; i<word.length(); i++) {
+			solvedWord[i] = "_";
+		}
+		// This block runs as long as the user has not solved the word yet;
+		while (solvedWord!= word) {
+			// Print the solved word.
+			for (int i=0; i<solvedWord.length(); i++) {
+				cout << solvedWord[i] << " ";
+			}
+			cout << endl << "What letter do you choose?: ";
+			cin >> selection;
+			while (selection.length()>1) {
+				cout << "Selection was invalid. Try again: ";
+				cin >> selection;
+			}
+			for (int i=0; i<word.length(); i++) {
+				if (word[i] == selection) {
+					solvedWord[i] = selection;
+				}
+			}
+		}
+		cout << "You have guessed the word! Play again? (Y/N): ";
+		cin >> selection;
+		while (selection!="Y" || selection!="y" || selection!="N" || selection!="n") {
+			cout << "Selection was invalid. Try again: ";
+			cin >> selection;
+		}
+		if (selection == "N" || selection == "n")
+			play = false;
+	} while (play);
 }

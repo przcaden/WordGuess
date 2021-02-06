@@ -7,6 +7,7 @@
 
 #ifndef DICTIONARY_H_
 #define DICTIONARY_H_
+#include <string>
 
 class Dictionary {
 private:

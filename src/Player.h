@@ -7,6 +7,7 @@
 
 #ifndef PLAYER_H_
 #define PLAYER_H_
+#include <string>
 
 class Player {
 private:
@@ -15,7 +16,7 @@ private:
 	int _losses;
 
 public:
-	Player() {}
+	Player(){}
 	Player(string);
 	void setName();
 	string getName();

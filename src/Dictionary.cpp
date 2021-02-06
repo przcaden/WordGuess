@@ -28,5 +28,6 @@ void Dictionary::generateList() {
 }
 
 string Dictionary::getWord() {
-
+	int val = rand() % _wordList.size();
+	return _wordList(val);
 }
