@@ -8,6 +8,7 @@
 #ifndef DICTIONARY_H_
 #define DICTIONARY_H_
 #include <string>
+#include <vector>
 
 class Dictionary {
 private:
@@ -15,9 +16,18 @@ private:
 
 public:
 	Dictionary();
-	void addWord(string); // manually add a string to the vector.
-	void generateList(); // generate a list from the words.txt file.
-	string getWord(); // get a word from the list.
+
+	void addWord(string);
+	//pre: param is a word intended to be added to _wordList
+	//post: param is pushed to the end of _wordList
+
+	void generateList();
+	//pre: user selected to generate the pre-made list of words
+	//post: _wordList is populated from words.txt
+
+	string getWord();
+	//pre: _wordList must be populated before call of this function
+	//post: return a random word in _wordList
 };
 
 #endif /* DICTIONARY_H_ */

@@ -39,19 +39,19 @@ int main() {
 	Dictionary list();
 	if (listchoice == "1") { // this if block uses a sentinel loop to add multiple words to the list.
 		string entry;
-		cout << "Please enter a word to include. Enter -1 to end your list: ";
+		cout << "Please enter a word to include. Enter -1 to end your list: " << endl;
 		cin >> entry;
 		while (entry != "-1") {
 			list.addWord(entry);
-			cout << "Enter a word: ";
+			cout << "Enter a word to add, or -1 to end: " << endl;
 			cin >> entry;
 		}
 	}
 	else list.generateList();
 
-	// Gets the user names and creates a personal class object.
+	// Gets the user's name and creates a personal class object.
 	string playername;
-	cout << "Proceeding..." << endl << "What is your name?: ";
+	cout << "Proceeding..." << endl << "What is your name?: " << endl;
 	cin >> playername;
 	Player player(playername);
 	cout << "Beginning the Word Guess game... " << endl;
@@ -59,37 +59,63 @@ int main() {
 
 	// Main block for the game.
 	do {
+		// Set default conditions when a new word is retrieved.
+		attemptsLeft = 5;
 		word = list.getWord();
 		solvedWord = word;
-		string selection;
+		char selection;
+		bool endCheck = false;
 		for (int i=0; i<word.length(); i++) {
 			solvedWord[i] = "_";
 		}
-		// This block runs as long as the user has not solved the word yet;
-		while (solvedWord!= word) {
+
+		// This block runs as long as the user has not solved the word yet.
+		while (!endCheck) {
 			// Print the solved word.
 			for (int i=0; i<solvedWord.length(); i++) {
 				cout << solvedWord[i] << " ";
 			}
-			cout << endl << "What letter do you choose?: ";
+			cout << endl << endl;
+			cout << "Attempts left: " << attemptsLeft << endl << "What letter do you choose?: " << endl;
 			cin >> selection;
-			while (selection.length()>1) {
-				cout << "Selection was invalid. Try again: ";
+
+			while (!isalpha(selection)) { // Checks if character entered was alphabetical.
+				cout << "Selection was invalid. Try again: " << endl;
 				cin >> selection;
 			}
+			selection = tolower(selection); // Convert the input to lowercase if not already.
+
+			// Check if the selection is a letter in the word. If not, decrement the attempts left by 1.
 			for (int i=0; i<word.length(); i++) {
 				if (word[i] == selection) {
 					solvedWord[i] = selection;
 				}
+				else attemptsLeft = attemptsLeft-1;
+			}
+			// Checks win condition.
+			if (solvedWord == word) {
+				endCheck = true;
+				player.incWins();
+				cout << "You have guessed the word!" << endl;
+			}
+			else if (attemptsLeft == 0) {
+				endCheck = true;
+				player.incLosses();
+				cout << "You have run out of attempts." << endl;
 			}
 		}
-		cout << "You have guessed the word! Play again? (Y/N): ";
+
+		// Ask the user if they want to continue playing.
+		cout << "Play again? (Y/N): ";
 		cin >> selection;
-		while (selection!="Y" || selection!="y" || selection!="N" || selection!="n") {
+		while (!(selection="Y" || selection="y" || selection="N" || selection="n")) {
 			cout << "Selection was invalid. Try again: ";
 			cin >> selection;
 		}
+
+		// If the user does not want to continue, the game loop ends.
 		if (selection == "N" || selection == "n")
 			play = false;
 	} while (play);
+	cout << "Thank you for playing the Word Guess game." << endl;
 }
