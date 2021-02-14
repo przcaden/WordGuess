@@ -1,14 +1,15 @@
 /*
- * Player.cpp
+ *  Player.cpp
  *
- *  Created on: Feb 3, 2021
- *      Author: przca
+ *  Created on: Feb 4, 2021
+ *  Author: Caden Perez
+ *
+ *  Description:
  */
 
 #include <string>
 #include "Player.h"
-
-Player::Player() {}
+using namespace std;
 
 Player::Player(string n) {
 	_name = n;
@@ -17,11 +18,11 @@ Player::Player(string n) {
 }
 
 void Player::incWins() {
-	_wins = _wins+1;
+	_wins++;
 }
 
 void Player::incLosses() {
-	_losses = _losses+1;
+	_losses++;
 }
 
 int Player::getWins() {
@@ -30,4 +31,8 @@ int Player::getWins() {
 
 int Player::getLosses() {
 	return _losses;
+}
+
+string Player::getName() {
+	return _name;
 }

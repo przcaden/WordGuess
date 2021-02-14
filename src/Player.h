@@ -1,13 +1,16 @@
 /*
- * Player.h
+ *  Player.h
  *
- *  Created on: Feb 3, 2021
- *      Author: przca
+ *  Created on: Feb 4, 2021
+ *  Author: Caden Perez
+ *
+ *  Description: header file for the Player class.
  */
 
 #ifndef PLAYER_H_
 #define PLAYER_H_
 #include <string>
+using namespace std;
 
 class Player {
 private:
@@ -16,7 +19,6 @@ private:
 	int _losses;
 
 public:
-	Player(){}
 	Player(string);
 	void setName();
 	string getName();
