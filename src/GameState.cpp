@@ -18,12 +18,6 @@ using namespace std;
 #include "Dictionary.h"
 
 int main() {
-	string word; // current word being solved by the user.
-	string solvedWord; // the current word, but only the letters they have guessed.
-	vector<string> wrongLetters; // wrong letters that the user has chosen.
-	vector<string> wrongWords; // wrong words that the user has played.
-	int attemptsLeft; // number of attempts the user has left.
-
 	string listchoice;
 	cout << "-------------------------------- The Word Guess Game --------------------------------" << endl;
 	cout << "Welcome. To start, would you prefer to (1) enter your own list of words or (2) use an auto-generated one?" << endl;
@@ -61,7 +55,14 @@ int main() {
 	cout << "Beginning the Word Guess game... " << endl;
 	bool play = true; // remains true if the user wants to continue to play.
 
-	// Main block for the game.
+	// Initialize variables for the game.
+	string word;
+	string solvedWord;
+	int attemptsLeft;
+	vector<string> inletters; // letters that the user has guessed.
+	vector<string> inwords; // wrong words that the user has played.
+
+	// Main block for the game. Continues running if the user chooses to play again.
 	while (play) {
 		// Set default conditions for when a new word is retrieved.
 		word = list.getWord();
@@ -70,11 +71,13 @@ int main() {
 		string selection;
 		bool endCheck = false;
 		bool correctguess;
+		inletters.clear();
+		inwords.clear();
 		for (int i=0; i<word.length(); i++) {
 			solvedWord[i] = '_';
 		}
 
-		// This block runs as long as the user has not solved the word yet.
+		// This block runs as long as the user is still guessing the current word.
 		while (!endCheck) {
 			// Print the solved word.
 			cout << endl << endl << endl;
@@ -83,17 +86,19 @@ int main() {
 			}
 			cout << endl << endl;
 			cout << "Attempts left: " << attemptsLeft << endl;
+
+			// Print the words and letters the user has guessed.
 			cout << "Letters guessed: ";
-			for (int i=0; i<wrongLetters.size(); i++) {
-				cout << wrongLetters[i] << "  ";
+			for (int i=0; i<inletters.size(); i++) {
+				cout << inletters[i] << "  ";
 			}
 			cout << endl << "Words guessed: ";
-			for (int i=0; i<wrongWords.size(); i++) {
-				cout << wrongWords[i] << "  ";
+			for (int i=0; i<inwords.size(); i++) {
+				cout << inwords[i] << "  ";
 			}
+
 			cout << endl << "What is your selection?: " << endl;
 			cin >> selection;
-
 			cout << endl;
 
 			// Runs if the user guessed a word.
@@ -105,7 +110,7 @@ int main() {
 					}
 				}
 				if (!correctguess)
-					wrongWords.push_back(selection);
+					inwords.push_back(selection);
 				else solvedWord = word;
 			}
 			// Runs if the user inputted a single character.
@@ -117,8 +122,7 @@ int main() {
 						solvedWord[i] = selection[0];
 					}
 				}
-				if (!correctguess)
-					wrongLetters.push_back(selection);
+				inletters.push_back(selection);
 			}
 			attemptsLeft--;
 
@@ -132,11 +136,12 @@ int main() {
 			else if (attemptsLeft == 0) {
 				endCheck = true;
 				player.incLosses();
-				cout << "Sorry, you have run out of attempts." << endl;
+				cout << "Sorry, you have run out of attempts. The correct word was: " << word << endl;
 			}
 		}
 
-		// Ask the user if they want to continue playing.
+		// Display wins/losses and asks if they want to continue playing.
+		cout << player.getName() << "'s current wins: " << player.getWins() << endl << player.getName() << "'s current losses: " << player.getLosses() << endl;
 		cout << "Play again? (Y/N): ";
 		cin >> selection;
 		while (!(selection=="Y" || selection=="y" || selection=="N" || selection=="n")) {
