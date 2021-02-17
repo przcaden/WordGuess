@@ -31,7 +31,7 @@ int main() {
 
 	// Following block generates the list of words based on the user's choice.
 	Dictionary list;
-	if (listchoice == "1") { // this if block uses a sentinel loop to add multiple words to the list.
+	if (listchoice == "1") {
 		string entry;
 		cout << "Please enter a word to include. Enter -1 to end your list: " << endl;
 		cin >> entry;
@@ -60,7 +60,7 @@ int main() {
 	string solvedWord;
 	int attemptsLeft;
 	vector<string> inletters; // letters that the user has guessed.
-	vector<string> inwords; // wrong words that the user has played.
+	vector<string> inwords; // words that the user has guessed.
 
 	// Main block for the game. Continues running if the user chooses to play again.
 	while (play) {

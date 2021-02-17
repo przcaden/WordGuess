@@ -29,7 +29,7 @@ void Dictionary::generateList(string list) {
 
 	string w;
 	infile >> w;
-	while (!infile.eof()) { // push every word in file to _wordList
+	while (!infile.eof()) { // push every word from file to _wordList
 		_wordList.push_back(w);
 		infile >> w;
 	}

@@ -17,7 +17,6 @@ expand
 exothermic
 exstatic
 elsewhere
-elucidate
 electron
 kangaroo
 leprechaun
@@ -56,5 +55,10 @@ vitascope
 vivian
 voiceful
 vocano
+weather
+write
+work
+wheelbarrow
 zebra
+zero
 zucchini
