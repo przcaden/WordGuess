@@ -16,8 +16,15 @@ using namespace std;
 
 Dictionary::Dictionary() {}
 
-void Dictionary::addWord(string w) {
-	_wordList.push_back(w);
+void Dictionary::enterList() {
+	string entry;
+	cout << "Please enter a word to include. Enter -1 to end your list: " << endl;
+	cin >> entry;
+	while (entry != "-1") {
+		_wordList.push_back(entry);
+		cout << "Enter a word to add, or -1 to end: " << endl;
+		cin >> entry;
+	}
 }
 
 void Dictionary::generateList(string list) {

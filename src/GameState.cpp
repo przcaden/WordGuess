@@ -5,7 +5,7 @@
  *  Author: Caden Perez
  *
  *  Description: Main class for the state of the word game. Prompts all user inputs in the console and prints every message.
- *  	Also manages class objects and their private values.
+ *  	Also manages class objects and their values.
  */
 
 #include <iostream>
@@ -31,16 +31,8 @@ int main() {
 
 	// Following block generates the list of words based on the user's choice.
 	Dictionary list;
-	if (listchoice == "1") {
-		string entry;
-		cout << "Please enter a word to include. Enter -1 to end your list: " << endl;
-		cin >> entry;
-		while (entry != "-1") {
-			list.addWord(entry);
-			cout << "Enter a word to add, or -1 to end: " << endl;
-			cin >> entry;
-		}
-	}
+	if (listchoice == "1")
+		list.enterList();
 	else {
 		cout << "Enter a file name for the word list: " << endl;
 		cin >> listchoice;

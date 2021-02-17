@@ -20,9 +20,9 @@ private:
 public:
 	Dictionary();
 
-	void addWord(string);
-	//pre: param is a word intended to be added to _wordList
-	//post: param is pushed to the end of _wordList
+	void enterList();
+	//pre: user selected to enter their own list of words
+	//post: _wordList is populated by all user-entered words
 
 	void generateList(string);
 	//pre: user selected to generate the pre-made list of words

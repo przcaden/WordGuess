@@ -4,7 +4,7 @@
  *  Created on: Feb 4, 2021
  *  Author: Caden Perez
  *
- *  Description:
+ *  Description: Holds the user's name, current wins, and current losses. Will increment either one after each game.
  */
 
 #include <string>
